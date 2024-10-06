@@ -1,0 +1,29 @@
+services:
+  web:
+    build: .
+    container_name: web_container
+    ports:
+      - "8080:80"
+    volumes:
+      - ./C:/xampp/htdocs/your-directory:/var/www/html
+    networks:
+      - app-network
+
+  db:
+    image: mysql:5.7
+    container_name: db_container
+    environment:
+      MYSQL_ROOT_PASSWORD: root_password
+      MYSQL_DATABASE: your_database
+      MYSQL_USER: your_user
+      MYSQL_PASSWORD: your_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+
+networks:
+  app-network:
